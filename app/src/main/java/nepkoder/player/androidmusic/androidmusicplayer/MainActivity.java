@@ -38,10 +38,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (fromUser) {
                     mediaPlayer.seekTo(progress);
 
+                    // set up format for timing
                     SimpleDateFormat dateFormat = new SimpleDateFormat("mm:ss");
                     int currentPosition = mediaPlayer.getCurrentPosition();
                     int duration = mediaPlayer.getDuration();
 
+                    // timing management for current songs
                     leftTime.setText(dateFormat.format(new Date(currentPosition)));
                     rightTime.setText(dateFormat.format(new Date(duration - currentPosition)));
                 }
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    // method for setting up ui
     public void setUI() {
 
         mediaPlayer = new MediaPlayer();
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nextButton.setOnClickListener(this);
     }
 
+    // as implemented on main class declaration (on click implementations)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -132,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+    // customize thread for media player
     public void updateThread() {
         thread = new Thread() {
 
@@ -166,40 +172,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+    // destroy the mediaplayer
+    @Override
+    protected void onDestroy() {
+        if (mediaPlayer!=null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+
+        thread.interrupt();
+        thread = null;
+        super.onDestroy();
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
