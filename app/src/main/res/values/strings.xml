@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">AndroidMusicPlayer</string>
     <string name="button_name">Play</string>
+    <string name="song_name">Flirty Maya</string>
+    <string name="artist_name">NJK</string>
 </resources>
