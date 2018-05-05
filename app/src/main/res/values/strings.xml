@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AndroidMusicPlayer</string>
+    <string name="button_name">Play</string>
+</resources>
